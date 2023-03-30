@@ -6,7 +6,15 @@
 {% if user.is_authenticated %}
 
     <div class="col-md-6 offset-md-3">
-    <h1>Home</h1>
+    <h1>Records</h1>
+        {% if records %}
+          {% for record in records %}
+            {{ record }}
+            {{ record.email }}
+          {% endfor %}
+        {% endif %}
+
+
     <br>
     {% else %}
     <div class="col-md-6 offset-md-3">

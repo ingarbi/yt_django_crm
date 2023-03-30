@@ -2,8 +2,11 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
+from .models import Record
+
 
 def home(request):
+    records = Record.objects.all()
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -18,7 +21,7 @@ def home(request):
             messages.warning(request, "A mistake occured, Try one more time")
             return redirect("home")
     else:
-        return render(request, "home.html")
+        return render(request, "home.html", {"records": records})
 
 
 def logout_user(request):
@@ -44,4 +47,4 @@ def register_user(request):
         else:
             messages.error(request, "An error occured during registration")
 
-    return render(request, "register.html", {'form':form})
+    return render(request, "register.html", {"form": form})
