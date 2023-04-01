@@ -5,15 +5,45 @@
 
 {% if user.is_authenticated %}
 
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-9 offset-md-1">
     <h1>Records</h1>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">City</th>
+          <th scope="col">Created At</th>
+        </tr>
+      </thead>
+      <tbody>
         {% if records %}
           {% for record in records %}
-            {{ record }}
+        <tr>
+          <td>{{ record.id }}</td>
+          <td>
+            {{ record.first_name }} {{ record.last_name }}
+          </td>
+          <td>
             {{ record.email }}
-          {% endfor %}
+          </td>
+          <td>
+            {{ record.phone }}
+          </td>
+          <td>
+            {{ record.city }}
+          </td>
+          <td>
+            {{ record.created_at }}
+          </td>
+        </tr>
+        {% endfor %}
         {% endif %}
-
+      </tbody>
+    </table>
 
     <br>
     {% else %}
