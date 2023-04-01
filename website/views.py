@@ -57,3 +57,14 @@ def record(request, pk):
     else:
         messages.error(request, "You have to login")
         return redirect("home")
+
+
+def delete_record(request, pk):
+    if request.user.is_authenticated:
+        del_record = Record.objects.get(id=pk)
+        del_record.delete()
+        messages.success(request, "You deleted the record")
+        return redirect("home")
+    else:
+        messages.error(request, "You have to login")
+        return redirect("home")
